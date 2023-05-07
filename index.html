@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SplitBot</title>
+  </head> 
+  <body>
+
+      <h1 style="text-align:center; color: crimson;"><img src="icon.png" alt="logo"/>Segment-GPT</h1>
+    <form>
+      <div id="label wala" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color:crimson">
+        <label for="paragraph"><h2>Enter a Paragraph:</h2></label>
+      </div>
+      
+      <br>
+        <br>
+      <textarea id="paragraph" name="paragraph" rows="50" cols="200"></textarea>
+      <br>
+      <div style="text-align: center">
+        <button type="button" onclick="splitParagraph() ">Split Paragraph</button>
+        <br>
+
+      </div>
+      
+    </form>
+    <div id="log">
+      <br>
+    </div>
+    <script>
+         console.log = function(message) {
+        var log = document.getElementById("log");
+        log.innerHTML += message + "<br>";
+      };
+      console.log("The total length of the content that I want to send you is too large to send in only one piece. For sending you that content, I will follow this rule: [START PART 1/10] this is the content of the part 1 out of 10 in total [END PART 1/10] Then you just answer: Received part 1/10 And when I tell you  ALL PARTS SENT, then you can continue processing the data and answering my requests. NOTE- I will not write START[1/10] etc consider it as each paragraph and number it accordingly as ascending order, you have to confirm when you receive each part, dont describe the before getting all the parts ");   
+      function splitParagraph() {
+        // Get the paragraph from the textarea
+        var paragraph = document.getElementById("paragraph").value;
+        
+        // Split the paragraph into 5 chunks
+        
+        if(paragraph.length<1500)
+        {
+            //console.log("Prompt is too short");
+           
+      
+      // Example console logs
+      console.log("Prompt is too short for splitting paragraph");
+           
+        }
+        else{
+            
+        
+        var chunkSize = Math.ceil(paragraph.length / 10);
+        var chunks = [];
+        for (var i = 0; i < paragraph.length; i += chunkSize) {
+          chunks.push(paragraph.slice(i, i + chunkSize));
+        }
+        
+        // Print the chunks
+        var output = document.createElement("div");
+        for (var i = 0; i < chunks.length; i++) {
+          var chunk = document.createElement("p");
+          chunk.textContent = chunks[i];
+          output.appendChild(chunk);
+        }
+        document.body.appendChild(output);
+      }
+
+      
+    }
+    </script>
+    <p style="color: blue;"><strong>ALL PART SENT. now you can continue processing the request</strong>  <--- (Just copy and paste this line at last after send all your chunks !!)</p>
+
+    <marquee><p>Made with <span style="color: red;">&hearts;</span> by Satyam Roy</p></marquee>
+
+  </body>
+</html>
